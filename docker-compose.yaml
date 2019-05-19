@@ -1,0 +1,24 @@
+version: '3'
+services:
+  frontend:
+    build: .
+    environment:
+      - FLASK_APP=frontend.py
+    env_file:
+      - .env
+    ports:
+      - 5000:5000
+    volumes:
+      - .:/code
+    links:
+      - backend
+    depends_on:
+      - backend
+  backend:
+    build: .
+    environment:
+      - FLASK_APP=backend.py
+    env_file:
+      - .env
+    volumes:
+      - .:/code
